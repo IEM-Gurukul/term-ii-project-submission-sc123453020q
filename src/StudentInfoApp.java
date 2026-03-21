@@ -193,4 +193,27 @@ public class StudentInfoApp {
         rowSorter.setRowFilter(null);
     }
 
+    private void saveToFileAsync() {
+
+        SwingWorker<Void,Void> worker = new SwingWorker<>() {
+
+            protected Void doInBackground() throws Exception {
+
+                try(PrintWriter writer =
+                            new PrintWriter(new FileWriter(FILE_NAME))) {
+
+                    for(Student s : studentList)
+                        writer.println(s.toFileString());
+
+                } catch(IOException e) {
+                    e.printStackTrace();
+                }
+
+                return null;
+            }
+        };
+
+        worker.execute();
+    }
+
     
