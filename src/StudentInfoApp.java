@@ -184,4 +184,13 @@ public class StudentInfoApp {
         clearFields();
     }
 
+    private void clearFields() {
+
+        nameField.setText("");
+        courseBox.setSelectedIndex(0);
+        searchField.setText("");
+
+        rowSorter.setRowFilter(null);
+    }
+
     
