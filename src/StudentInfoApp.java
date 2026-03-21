@@ -156,3 +156,32 @@ public class StudentInfoApp {
 
         frame.setJMenuBar(mb);
     }
+
+    private void handleSave() {
+
+        String name = nameField.getText().trim();
+        String course = (String) courseBox.getSelectedItem();
+
+        if(name.isEmpty()) {
+            JOptionPane.showMessageDialog(frame,
+                    "Name is required!",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Student student = new Student(name, course);
+
+        studentList.add(student);
+
+        tableModel.addRow(new Object[]{
+                student.getName(),
+                student.getCourse()
+        });
+
+        saveToFileAsync();
+
+        clearFields();
+    }
+
+    
