@@ -216,4 +216,35 @@ public class StudentInfoApp {
         worker.execute();
     }
 
+    private void loadFromFile() {
+
+        File file = new File(FILE_NAME);
+
+        if(!file.exists())
+            return;
+
+        try(BufferedReader reader =
+                    new BufferedReader(new FileReader(file))) {
+
+            String line;
+
+            while((line = reader.readLine()) != null) {
+
+                String[] data = line.split(",");
+
+                Student student = new Student(data[0], data[1]);
+
+                studentList.add(student);
+
+                tableModel.addRow(new Object[]{
+                        student.getName(),
+                        student.getCourse()
+                });
+            }
+
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     
